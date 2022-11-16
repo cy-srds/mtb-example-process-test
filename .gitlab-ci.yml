@@ -1,5 +1,6 @@
 variables:
   # Specify the code example version. This version is used for tagging the staging repository.
+  CE_REL_VERSION: 1.0.0
 
   # Specify the toolchain, separated by spaces. E.g. GCC_ARM IAR ARM
   CE_TOOLCHAIN_LIST: GCC_ARM IAR ARM
