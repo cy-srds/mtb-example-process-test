@@ -6,15 +6,17 @@ find_package(Zephyr REQUIRED HINTS $ENV{ZEPHYR_BASE})
 project(capsense)
 
 set(PDL_DRIVER_DIR ${ZEPHYR_HAL_INFINEON_MODULE_DIR}/mtb-pdl-cat1/drivers/source)
-set(PSOC6HAL_SOURCE_DIR ${ZEPHYR_HAL_INFINEON_MODULE_DIR}/mtb-hal-cat1/COMPONENT_PSOC6HAL/source)
+set(HAL_SOURCE_DIR ${ZEPHYR_HAL_INFINEON_MODULE_DIR}/mtb-hal-cat1/COMPONENT_PSOC6HAL/source)
 set(CAPSENSE_LIB_DIR "${ZEPHYR_HAL_INFINEON_MODULE_DIR}/../../lib/capsense")
+
+zephyr_library_sources(${PDL_DRIVER_DIR}/cy_tcpwm_pwm.c ${PDL_DRIVER_DIR}/cy_scb_ezi2c.c ${PDL_DRIVER_DIR}/cy_scb_i2c.c)
+zephyr_library_sources(${HAL_SOURCE_DIR}/cyhal_pwm.c ${HAL_SOURCE_DIR}/cyhal_tcpwm_common.c ${HAL_SOURCE_DIR}/cyhal_ezi2c.c)
 zephyr_include_directories(${CAPSENSE_LIB_DIR})
 FILE(GLOB capsense_sources ${CAPSENSE_LIB_DIR}/*.c)
-zephyr_library_sources(${capsense_sources} ${PDL_DRIVER_DIR}/cy_csd.c ${PDL_DRIVER_DIR}/cy_tcpwm_pwm.c ${PDL_DRIVER_DIR}/cy_scb_ezi2c.c ${PDL_DRIVER_DIR}/cy_scb_i2c.c)
-zephyr_library_sources(${PSOC6HAL_SOURCE_DIR}/cyhal_pwm.c ${PSOC6HAL_SOURCE_DIR}/cyhal_tcpwm_common.c ${PSOC6HAL_SOURCE_DIR}/cyhal_ezi2c.c)
+zephyr_library_sources(${capsense_sources} ${PDL_DRIVER_DIR}/cy_csd.c)
 
-zephyr_include_directories(src GeneratedSource)
-FILE(GLOB app_sources src/*.c GeneratedSource/*c ${CAPSENSE_LIB_DIR}/*.c)
+zephyr_include_directories(GeneratedSource src)
+FILE(GLOB app_sources GeneratedSource/*c src/*.c)
 target_sources(app PRIVATE ${app_sources})
 
 add_library(libcy_capsense STATIC IMPORTED GLOBAL)

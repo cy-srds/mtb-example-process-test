@@ -4,9 +4,10 @@
 * Description:
 * Clock configuration
 * This file was automatically generated and should not be modified.
-* Configurator Backend 3.0.0
-* device-db 4.1.0.3253
-* mtb-pdl-cat1 3.3.0.20630
+* Tools Package 2.4.1.9711
+* mtb-pdl-cat1 2.4.1.17937
+* personalities 6.0.0.0
+* udd 3.0.0.2024
 *
 ********************************************************************************
 * Copyright 2023 Cypress Semiconductor Corporation (an Infineon company) or
@@ -39,28 +40,19 @@
 extern "C" {
 #endif
 
-#define peri_0_div_16_15_ENABLED 1U
-#define peri_0_div_16_15_HW CY_SYSCLK_DIV_16_BIT
-#define peri_0_div_16_15_NUM 15U
 #define CYBSP_CSD_CLK_DIV_ENABLED 1U
 #define CYBSP_CS_CLK_DIV_ENABLED CYBSP_CSD_CLK_DIV_ENABLED
 #define CYBSP_CSD_CLK_DIV_HW CY_SYSCLK_DIV_8_BIT
 #define CYBSP_CS_CLK_DIV_HW CYBSP_CSD_CLK_DIV_HW
 #define CYBSP_CSD_CLK_DIV_NUM 0U
 #define CYBSP_CS_CLK_DIV_NUM CYBSP_CSD_CLK_DIV_NUM
-#define CYBSP_TRACE_CLK_DIV_ENABLED 1U
-#define CYBSP_TRACE_CLK_DIV_HW CY_SYSCLK_DIV_8_BIT
-#define CYBSP_TRACE_CLK_DIV_NUM 7U
 
 #if defined (CY_USING_HAL)
-    extern const cyhal_resource_inst_t peri_0_div_16_15_obj;
     extern const cyhal_resource_inst_t CYBSP_CSD_CLK_DIV_obj;
     #define CYBSP_CS_CLK_DIV_obj CYBSP_CSD_CLK_DIV_obj
-    extern const cyhal_resource_inst_t CYBSP_TRACE_CLK_DIV_obj;
 #endif //defined (CY_USING_HAL)
 
 void init_cycfg_clocks(void);
-void reserve_cycfg_clocks(void);
 
 #if defined(__cplusplus)
 }

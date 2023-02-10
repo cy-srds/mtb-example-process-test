@@ -4,9 +4,10 @@
 * Description:
 * Establishes all necessary connections between hardware elements.
 * This file was automatically generated and should not be modified.
-* Configurator Backend 3.0.0
-* device-db 4.1.0.3253
-* mtb-pdl-cat1 3.3.0.20630
+* Tools Package 2.4.1.9711
+* mtb-pdl-cat1 2.4.1.17937
+* personalities 6.0.0.0
+* udd 3.0.0.2024
 *
 ********************************************************************************
 * Copyright 2023 Cypress Semiconductor Corporation (an Infineon company) or
@@ -35,7 +36,7 @@ extern "C" {
 
 #include "cycfg_notices.h"
 void init_cycfg_routing(void);
-
+#define init_cycfg_connectivity() init_cycfg_routing()
 #define ioss_0_port_0_pin_0_ANALOG P0_0_SRSS_WCO_IN
 #define ioss_0_port_0_pin_1_ANALOG P0_1_SRSS_WCO_OUT
 #define ioss_0_port_1_pin_0_HSIOM HSIOM_SEL_AMUXA

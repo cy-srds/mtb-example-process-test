@@ -2,7 +2,7 @@ sample:
   name: CAPSENSE Buttons and Slider
 tests:
   sample.basic.capsense:
-    tags: button gpio
-    filter: dt_enabled_alias_with_parent_compat("sw0", "gpio-keys")
+    tags: gpio
+    filter: dt_enabled_alias_with_parent_compat("gpio-keys")
     depends_on: gpio
-    harness: button
+    harness: gpio

@@ -1,0 +1,16 @@
+manifest:
+  projects:
+    - name: infineon_zephyr_capsense
+      url: https://github.com/Infineon/capsense
+      submodules: true
+      revision: master
+      path: modules/lib/capsense
+      groups:
+        - lib
+    - name: zephyr_example_capsense_button_slider
+      url: https://github.com/cy-srds/zephyr-example-capsense-button-slider
+      submodules: true
+      revision: capsense-port-v1
+      path: zephyr/samples/basic/capsense
+      groups:
+        - samples

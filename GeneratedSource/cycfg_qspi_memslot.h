@@ -4,11 +4,10 @@
 * Description:
 * Provides declarations of the SMIF-driver memory configuration.
 * This file was automatically generated and should not be modified.
-* QSPI Configurator 4.0.0.985
+* QSPI Configurator 2.20.0.2857
 *
 ********************************************************************************
-* Copyright 2023 Cypress Semiconductor Corporation (an Infineon company) or
-* an affiliate of Cypress Semiconductor Corporation.
+* Copyright 2020 Cypress Semiconductor Corporation
 * SPDX-License-Identifier: Apache-2.0
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,7 +27,7 @@
 #define CYCFG_QSPI_MEMSLOT_H
 #include "cy_smif_memslot.h"
 
-#define CY_SMIF_CFG_TOOL_VERSION           (400)
+#define CY_SMIF_CFG_TOOL_VERSION           (220)
 
 /* Supported QSPI Driver version */
 #define CY_SMIF_DRV_VERSION_REQUIRED       (100)
@@ -57,10 +56,10 @@ extern const cy_stc_smif_mem_cmd_t S25FL512S_SlaveSlot_0_writeStsRegQeCmd;
 extern const cy_stc_smif_mem_device_cfg_t deviceCfg_S25FL512S_SlaveSlot_0;
 
 extern const cy_stc_smif_mem_config_t S25FL512S_SlaveSlot_0;
-
 extern const cy_stc_smif_mem_config_t* const smifMemConfigs[CY_SMIF_DEVICE_NUM];
 
 extern const cy_stc_smif_block_config_t smifBlockConfig;
 
 
 #endif /*CYCFG_QSPI_MEMSLOT_H*/
+

@@ -4,9 +4,10 @@
 * Description:
 * Wrapper function to initialize all generated code.
 * This file was automatically generated and should not be modified.
-* Configurator Backend 3.0.0
-* device-db 4.1.0.3253
-* mtb-pdl-cat1 3.3.0.20630
+* Tools Package 2.4.1.9711
+* mtb-pdl-cat1 2.4.1.17937
+* personalities 6.0.0.0
+* udd 3.0.0.2024
 *
 ********************************************************************************
 * Copyright 2023 Cypress Semiconductor Corporation (an Infineon company) or
@@ -28,23 +29,11 @@
 
 #include "cycfg.h"
 
-/* This function is provided for compatibility with older 2.X style projects. */
 void init_cycfg_all(void)
-{
-    cycfg_config_init();
-    cycfg_config_reservations();
-}
-void cycfg_config_init(void)
 {
     init_cycfg_system();
     init_cycfg_clocks();
     init_cycfg_routing();
     init_cycfg_peripherals();
     init_cycfg_pins();
-}
-void cycfg_config_reservations(void)
-{
-    reserve_cycfg_system();
-    reserve_cycfg_clocks();
-    reserve_cycfg_pins();
 }

@@ -5,9 +5,10 @@
 * Contains warnings and errors that occurred while generating code for the
 * design.
 * This file was automatically generated and should not be modified.
-* Configurator Backend 3.0.0
-* device-db 4.1.0.3253
-* mtb-pdl-cat1 3.3.0.20630
+* Tools Package 2.4.1.9711
+* mtb-pdl-cat1 2.4.1.17937
+* personalities 6.0.0.0
+* udd 3.0.0.2024
 *
 ********************************************************************************
 * Copyright 2023 Cypress Semiconductor Corporation (an Infineon company) or
@@ -32,16 +33,7 @@
 
 #ifdef CY_SUPPORTS_DEVICE_VALIDATION
 #ifndef CY8C624ABZI_S2D44
-    #error "Unexpected MPN; expected DEVICE:=CY8C624ABZI-S2D44. There may be an inconsistency between the *.modus file and the makefile target configuration device sets."
-#endif
-#endif
-
-#ifdef CY_SUPPORTS_COMPLETE_DEVICE_VALIDATION
-#ifndef CY8C624ABZI_S2D44
-    #error "Unexpected MPN; expected DEVICE:=CY8C624ABZI-S2D44, ADDITIONAL_DEVICES:=CYW4343WKUBG. There may be an inconsistency between the *.modus file and the makefile target configuration device sets."
-#endif
-#ifndef CYW4343WKUBG
-    #error "Unexpected MPN; expected DEVICE:=CY8C624ABZI-S2D44, ADDITIONAL_DEVICES:=CYW4343WKUBG. There may be an inconsistency between the *.modus file and the makefile target configuration device sets."
+    #error "Unexpected target MCU; expected CY8C624ABZI-S2D44. There may be an inconsistency between the *.modus file and the makefile target configuration device sets."
 #endif
 #endif
 

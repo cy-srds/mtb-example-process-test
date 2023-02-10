@@ -4,9 +4,10 @@
 * Description:
 * System configuration
 * This file was automatically generated and should not be modified.
-* Configurator Backend 3.0.0
-* device-db 4.1.0.3253
-* mtb-pdl-cat1 3.3.0.20630
+* Tools Package 2.4.1.9711
+* mtb-pdl-cat1 2.4.1.17937
+* personalities 6.0.0.0
+* udd 3.0.0.2024
 *
 ********************************************************************************
 * Copyright 2023 Cypress Semiconductor Corporation (an Infineon company) or
@@ -126,30 +127,40 @@
         .block_num = 0U,
         .channel_num = 0U,
     };
+#endif //defined (CY_USING_HAL)
+#if defined (CY_USING_HAL)
     const cyhal_resource_inst_t srss_0_clock_0_pathmux_1_obj = 
     {
         .type = CYHAL_RSC_CLKPATH,
         .block_num = 1U,
         .channel_num = 0U,
     };
+#endif //defined (CY_USING_HAL)
+#if defined (CY_USING_HAL)
     const cyhal_resource_inst_t srss_0_clock_0_pathmux_2_obj = 
     {
         .type = CYHAL_RSC_CLKPATH,
         .block_num = 2U,
         .channel_num = 0U,
     };
+#endif //defined (CY_USING_HAL)
+#if defined (CY_USING_HAL)
     const cyhal_resource_inst_t srss_0_clock_0_pathmux_3_obj = 
     {
         .type = CYHAL_RSC_CLKPATH,
         .block_num = 3U,
         .channel_num = 0U,
     };
+#endif //defined (CY_USING_HAL)
+#if defined (CY_USING_HAL)
     const cyhal_resource_inst_t srss_0_clock_0_pathmux_4_obj = 
     {
         .type = CYHAL_RSC_CLKPATH,
         .block_num = 4U,
         .channel_num = 0U,
     };
+#endif //defined (CY_USING_HAL)
+#if defined (CY_USING_HAL)
     const cyhal_resource_inst_t srss_0_clock_0_pathmux_5_obj = 
     {
         .type = CYHAL_RSC_CLKPATH,
@@ -173,12 +184,6 @@ __WEAK void __NO_RETURN cycfg_ClockStartupError(uint32_t error)
     (void)error; /* Suppress the compiler warning */
     while(1);
 }
-#if (!defined(CY_DEVICE_SECURE))
-    __STATIC_INLINE void Cy_SysClk_FllDeInit()
-    {
-        Cy_SysClk_FllDisable();
-    }
-#endif //(!defined(CY_DEVICE_SECURE))
 #if defined (CY_DEVICE_SECURE)
     void init_cycfg_secure_struct(cy_stc_pra_system_config_t * secure_config)
     {
@@ -651,17 +656,19 @@ __WEAK void __NO_RETURN cycfg_ClockStartupError(uint32_t error)
         #endif /* CY_CFG_SYSCLK_ALTHF_BLE_ECO_VOL_REGULATOR */
     }
 #endif //defined (CY_DEVICE_SECURE)
-#if ((!CY_CPU_CORTEX_M4) || (!defined(CY_DEVICE_SECURE)))
+#if (!defined(CY_DEVICE_SECURE))
     __STATIC_INLINE void Cy_SysClk_ClkBakInit()
     {
         Cy_SysClk_ClkBakSetSource(CY_SYSCLK_BAK_IN_WCO);
     }
-#endif //((!CY_CPU_CORTEX_M4) || (!defined(CY_DEVICE_SECURE)))
+#endif //(!defined(CY_DEVICE_SECURE))
 #if (!defined(CY_DEVICE_SECURE))
     __STATIC_INLINE void Cy_SysClk_ClkFastInit()
     {
         Cy_SysClk_ClkFastSetDivider(0U);
     }
+#endif //(!defined(CY_DEVICE_SECURE))
+#if (!defined(CY_DEVICE_SECURE))
     __STATIC_INLINE void Cy_SysClk_FllInit()
     {
         if (CY_SYSCLK_SUCCESS != Cy_SysClk_FllManualConfigure(&srss_0_clock_0_fll_0_fllConfig))
@@ -673,50 +680,72 @@ __WEAK void __NO_RETURN cycfg_ClockStartupError(uint32_t error)
             cycfg_ClockStartupError(CY_CFG_SYSCLK_FLL_ERROR);
         }
     }
+#endif //(!defined(CY_DEVICE_SECURE))
+#if (!defined(CY_DEVICE_SECURE))
     __STATIC_INLINE void Cy_SysClk_ClkHf0Init()
     {
         Cy_SysClk_ClkHfSetSource(0U, CY_CFG_SYSCLK_CLKHF0_CLKPATH);
         Cy_SysClk_ClkHfSetDivider(0U, CY_SYSCLK_CLKHF_NO_DIVIDE);
     }
+#endif //(!defined(CY_DEVICE_SECURE))
+#if (!defined(CY_DEVICE_SECURE))
     __STATIC_INLINE void Cy_SysClk_IloInit()
     {
         /* The WDT is unlocked in the default startup code */
         Cy_SysClk_IloEnable();
         Cy_SysClk_IloHibernateOn(true);
     }
+#endif //(!defined(CY_DEVICE_SECURE))
+#if (!defined(CY_DEVICE_SECURE))
     __STATIC_INLINE void Cy_SysClk_ClkLfInit()
     {
         /* The WDT is unlocked in the default startup code */
         Cy_SysClk_ClkLfSetSource(CY_SYSCLK_CLKLF_IN_WCO);
     }
+#endif //(!defined(CY_DEVICE_SECURE))
+#if (!defined(CY_DEVICE_SECURE))
     __STATIC_INLINE void Cy_SysClk_ClkPath0Init()
     {
         Cy_SysClk_ClkPathSetSource(0U, CY_CFG_SYSCLK_CLKPATH0_SOURCE);
     }
+#endif //(!defined(CY_DEVICE_SECURE))
+#if (!defined(CY_DEVICE_SECURE))
     __STATIC_INLINE void Cy_SysClk_ClkPath1Init()
     {
         Cy_SysClk_ClkPathSetSource(1U, CY_CFG_SYSCLK_CLKPATH1_SOURCE);
     }
+#endif //(!defined(CY_DEVICE_SECURE))
+#if (!defined(CY_DEVICE_SECURE))
     __STATIC_INLINE void Cy_SysClk_ClkPath2Init()
     {
         Cy_SysClk_ClkPathSetSource(2U, CY_CFG_SYSCLK_CLKPATH2_SOURCE);
     }
+#endif //(!defined(CY_DEVICE_SECURE))
+#if (!defined(CY_DEVICE_SECURE))
     __STATIC_INLINE void Cy_SysClk_ClkPath3Init()
     {
         Cy_SysClk_ClkPathSetSource(3U, CY_CFG_SYSCLK_CLKPATH3_SOURCE);
     }
+#endif //(!defined(CY_DEVICE_SECURE))
+#if (!defined(CY_DEVICE_SECURE))
     __STATIC_INLINE void Cy_SysClk_ClkPath4Init()
     {
         Cy_SysClk_ClkPathSetSource(4U, CY_CFG_SYSCLK_CLKPATH4_SOURCE);
     }
+#endif //(!defined(CY_DEVICE_SECURE))
+#if (!defined(CY_DEVICE_SECURE))
     __STATIC_INLINE void Cy_SysClk_ClkPath5Init()
     {
         Cy_SysClk_ClkPathSetSource(5U, CY_CFG_SYSCLK_CLKPATH5_SOURCE);
     }
+#endif //(!defined(CY_DEVICE_SECURE))
+#if (!defined(CY_DEVICE_SECURE))
     __STATIC_INLINE void Cy_SysClk_ClkPeriInit()
     {
         Cy_SysClk_ClkPeriSetDivider(0U);
     }
+#endif //(!defined(CY_DEVICE_SECURE))
+#if (!defined(CY_DEVICE_SECURE))
     __STATIC_INLINE void Cy_SysClk_Pll0Init()
     {
         if (CY_SYSCLK_SUCCESS != Cy_SysClk_PllManualConfigure(1U, &srss_0_clock_0_pll_0_pllConfig))
@@ -728,10 +757,14 @@ __WEAK void __NO_RETURN cycfg_ClockStartupError(uint32_t error)
             cycfg_ClockStartupError(CY_CFG_SYSCLK_PLL_ERROR);
         }
     }
+#endif //(!defined(CY_DEVICE_SECURE))
+#if (!defined(CY_DEVICE_SECURE))
     __STATIC_INLINE void Cy_SysClk_ClkSlowInit()
     {
         Cy_SysClk_ClkSlowSetDivider(0U);
     }
+#endif //(!defined(CY_DEVICE_SECURE))
+#if (!defined(CY_DEVICE_SECURE))
     __STATIC_INLINE void Cy_SysClk_WcoInit()
     {
         (void)Cy_GPIO_Pin_FastInit(GPIO_PRT0, 0U, 0x00U, 0x00U, HSIOM_SEL_GPIO);
@@ -741,6 +774,8 @@ __WEAK void __NO_RETURN cycfg_ClockStartupError(uint32_t error)
             cycfg_ClockStartupError(CY_CFG_SYSCLK_WCO_ERROR);
         }
     }
+#endif //(!defined(CY_DEVICE_SECURE))
+#if (!defined(CY_DEVICE_SECURE))
     __STATIC_INLINE void init_cycfg_power(void)
     {
         /* Reset the Backup domain on POR, XRES, BOD only if Backup domain is supplied by VDDD */
@@ -795,7 +830,6 @@ __WEAK void __NO_RETURN cycfg_ClockStartupError(uint32_t error)
 
 void init_cycfg_system(void)
 {
-    Cy_SysClk_PeriphAssignDivider(PCLK_CPUSS_CLOCK_TRACE_IN, CY_SYSCLK_DIV_8_BIT, 7U);
     #if defined(CY_DEVICE_SECURE)
         cy_en_pra_status_t configStatus;
         init_cycfg_secure_struct(&srss_0_clock_0_secureConfig);
@@ -825,6 +859,7 @@ void init_cycfg_system(void)
         {
             cycfg_ClockStartupError(configStatus);
         }
+
         #ifdef CY_CFG_SYSCLK_EXTCLK_FREQ
             Cy_SysClk_ExtClkSetFrequency(CY_CFG_SYSCLK_EXTCLK_FREQ);
         #endif /* CY_CFG_SYSCLK_EXTCLK_FREQ */
@@ -832,16 +867,13 @@ void init_cycfg_system(void)
     
         /* Set worst case memory wait states (! ultra low power, 150 MHz), will update at the end */
         Cy_SysLib_SetWaitStates(false, 150UL);
-    #ifdef CY_CFG_PWR_ENABLED
-        #ifdef CY_CFG_PWR_INIT
-            init_cycfg_power();
-        #else
-            #warning Power system will not be configured. Update power personality to v1.20 or later.
-        #endif /* CY_CFG_PWR_INIT */
-    #endif /* CY_CFG_PWR_ENABLED */
-    
-        /* Disable FLL */
-        Cy_SysClk_FllDeInit();
+        #ifdef CY_CFG_PWR_ENABLED
+            #ifdef CY_CFG_PWR_INIT
+                init_cycfg_power();
+            #else
+                #warning Power system will not be configured. Update power personality to v1.20 or later.
+            #endif /* CY_CFG_PWR_INIT */
+        #endif /* CY_CFG_PWR_ENABLED */
     
         /* Reset the core clock path to default and disable all the FLLs/PLLs */
         Cy_SysClk_ClkHfSetDivider(0U, CY_SYSCLK_CLKHF_NO_DIVIDE);
@@ -860,6 +892,7 @@ void init_cycfg_system(void)
             Cy_SysClk_ClkHfSetSource(0U, CY_SYSCLK_CLKHF_IN_CLKPATH1);
         }
     
+        Cy_SysClk_FllDisable();
         Cy_SysClk_ClkPathSetSource(CY_SYSCLK_CLKHF_IN_CLKPATH0, CY_SYSCLK_CLKPATH_IN_IMO);
         Cy_SysClk_ClkHfSetSource(0UL, CY_SYSCLK_CLKHF_IN_CLKPATH0);
         #ifdef CY_IP_MXBLESS
@@ -867,30 +900,32 @@ void init_cycfg_system(void)
         #endif
     
     
-    /* Enable all source clocks */
-    #ifdef CY_CFG_SYSCLK_PILO_ENABLED
-        Cy_SysClk_PiloInit();
-    #endif
+        /* Enable all source clocks */
+        #ifdef CY_CFG_SYSCLK_PILO_ENABLED
+            Cy_SysClk_PiloInit();
+        #endif
     
-    #ifdef CY_CFG_SYSCLK_WCO_ENABLED
-        Cy_SysClk_WcoInit();
-    #endif
+        #ifdef CY_CFG_SYSCLK_WCO_ENABLED
+            Cy_SysClk_WcoInit();
+        #endif
     
-    #ifdef CY_CFG_SYSCLK_CLKLF_ENABLED
-        Cy_SysClk_ClkLfInit();
-    #endif
+        #ifdef CY_CFG_SYSCLK_CLKLF_ENABLED
+            Cy_SysClk_ClkLfInit();
+        #endif
     
         #if (defined(CY_IP_M4CPUSS) && CY_CFG_SYSCLK_ALTHF_ENABLED)
+
             Cy_SysClk_AltHfInit();
         #endif /* (defined(CY_IP_M4CPUSS) && CY_CFG_SYSCLK_ALTHF_ENABLED */
+
     
         #ifdef CY_CFG_SYSCLK_ECO_ENABLED
             Cy_SysClk_EcoInit();
         #endif
     
-    #ifdef CY_CFG_SYSCLK_EXTCLK_ENABLED
-        Cy_SysClk_ExtClkInit();
-    #endif
+        #ifdef CY_CFG_SYSCLK_EXTCLK_ENABLED
+            Cy_SysClk_ExtClkInit();
+        #endif
     
         /* Configure CPU clock dividers */
         #ifdef CY_CFG_SYSCLK_CLKFAST_ENABLED
@@ -910,190 +945,190 @@ void init_cycfg_system(void)
             Cy_SysClk_ClkPathSetSource(1UL, CY_SYSCLK_CLKPATH_IN_IMO);
             Cy_SysClk_ClkHfSetSource(0UL, CY_SYSCLK_CLKHF_IN_CLKPATH1);
         #else
-    #ifdef CY_CFG_SYSCLK_CLKPATH1_ENABLED
-        Cy_SysClk_ClkPath1Init();
+            #ifdef CY_CFG_SYSCLK_CLKPATH1_ENABLED
+                Cy_SysClk_ClkPath1Init();
             #endif
         #endif
     
         /* Configure Path Clocks */
         #ifdef CY_CFG_SYSCLK_CLKPATH0_ENABLED
             Cy_SysClk_ClkPath0Init();
-    #endif
-    #ifdef CY_CFG_SYSCLK_CLKPATH2_ENABLED
-        Cy_SysClk_ClkPath2Init();
-    #endif
-    #ifdef CY_CFG_SYSCLK_CLKPATH3_ENABLED
-        Cy_SysClk_ClkPath3Init();
-    #endif
-    #ifdef CY_CFG_SYSCLK_CLKPATH4_ENABLED
-        Cy_SysClk_ClkPath4Init();
-    #endif
-    #ifdef CY_CFG_SYSCLK_CLKPATH5_ENABLED
-        Cy_SysClk_ClkPath5Init();
-    #endif
-    #ifdef CY_CFG_SYSCLK_CLKPATH6_ENABLED
-        Cy_SysClk_ClkPath6Init();
-    #endif
-    #ifdef CY_CFG_SYSCLK_CLKPATH7_ENABLED
-        Cy_SysClk_ClkPath7Init();
-    #endif
-    #ifdef CY_CFG_SYSCLK_CLKPATH8_ENABLED
-        Cy_SysClk_ClkPath8Init();
-    #endif
-    #ifdef CY_CFG_SYSCLK_CLKPATH9_ENABLED
-        Cy_SysClk_ClkPath9Init();
-    #endif
-    #ifdef CY_CFG_SYSCLK_CLKPATH10_ENABLED
-        Cy_SysClk_ClkPath10Init();
-    #endif
-    #ifdef CY_CFG_SYSCLK_CLKPATH11_ENABLED
-        Cy_SysClk_ClkPath11Init();
-    #endif
-    #ifdef CY_CFG_SYSCLK_CLKPATH12_ENABLED
-        Cy_SysClk_ClkPath12Init();
-    #endif
-    #ifdef CY_CFG_SYSCLK_CLKPATH13_ENABLED
-        Cy_SysClk_ClkPath13Init();
-    #endif
-    #ifdef CY_CFG_SYSCLK_CLKPATH14_ENABLED
-        Cy_SysClk_ClkPath14Init();
-    #endif
-    #ifdef CY_CFG_SYSCLK_CLKPATH15_ENABLED
-        Cy_SysClk_ClkPath15Init();
-    #endif
-    
-    /* Configure and enable FLL */
-    #ifdef CY_CFG_SYSCLK_FLL_ENABLED
-        Cy_SysClk_FllInit();
-    #endif
-    
-    Cy_SysClk_ClkHf0Init();
-    
-    #if ((CY_CFG_SYSCLK_CLKPATH0_SOURCE_NUM == 0x6UL) && (CY_CFG_SYSCLK_CLKHF0_CLKPATH_NUM == 0U))
-        #ifdef CY_CFG_SYSCLK_CLKPATH1_ENABLED
-            /* Apply the ClkPath1 user setting */
-            Cy_SysClk_ClkPath1Init();
         #endif
-    #endif
+        #ifdef CY_CFG_SYSCLK_CLKPATH2_ENABLED
+            Cy_SysClk_ClkPath2Init();
+        #endif
+        #ifdef CY_CFG_SYSCLK_CLKPATH3_ENABLED
+            Cy_SysClk_ClkPath3Init();
+        #endif
+        #ifdef CY_CFG_SYSCLK_CLKPATH4_ENABLED
+            Cy_SysClk_ClkPath4Init();
+        #endif
+        #ifdef CY_CFG_SYSCLK_CLKPATH5_ENABLED
+            Cy_SysClk_ClkPath5Init();
+        #endif
+        #ifdef CY_CFG_SYSCLK_CLKPATH6_ENABLED
+            Cy_SysClk_ClkPath6Init();
+        #endif
+        #ifdef CY_CFG_SYSCLK_CLKPATH7_ENABLED
+            Cy_SysClk_ClkPath7Init();
+        #endif
+        #ifdef CY_CFG_SYSCLK_CLKPATH8_ENABLED
+            Cy_SysClk_ClkPath8Init();
+        #endif
+        #ifdef CY_CFG_SYSCLK_CLKPATH9_ENABLED
+            Cy_SysClk_ClkPath9Init();
+        #endif
+        #ifdef CY_CFG_SYSCLK_CLKPATH10_ENABLED
+            Cy_SysClk_ClkPath10Init();
+        #endif
+        #ifdef CY_CFG_SYSCLK_CLKPATH11_ENABLED
+            Cy_SysClk_ClkPath11Init();
+        #endif
+        #ifdef CY_CFG_SYSCLK_CLKPATH12_ENABLED
+            Cy_SysClk_ClkPath12Init();
+        #endif
+        #ifdef CY_CFG_SYSCLK_CLKPATH13_ENABLED
+            Cy_SysClk_ClkPath13Init();
+        #endif
+        #ifdef CY_CFG_SYSCLK_CLKPATH14_ENABLED
+            Cy_SysClk_ClkPath14Init();
+        #endif
+        #ifdef CY_CFG_SYSCLK_CLKPATH15_ENABLED
+            Cy_SysClk_ClkPath15Init();
+        #endif
     
-    /* Configure and enable PLLs */
-    #ifdef CY_CFG_SYSCLK_PLL0_ENABLED
-        Cy_SysClk_Pll0Init();
-    #endif
-    #ifdef CY_CFG_SYSCLK_PLL1_ENABLED
-        Cy_SysClk_Pll1Init();
-    #endif
-    #ifdef CY_CFG_SYSCLK_PLL2_ENABLED
-        Cy_SysClk_Pll2Init();
-    #endif
-    #ifdef CY_CFG_SYSCLK_PLL3_ENABLED
-        Cy_SysClk_Pll3Init();
-    #endif
-    #ifdef CY_CFG_SYSCLK_PLL4_ENABLED
-        Cy_SysClk_Pll4Init();
-    #endif
-    #ifdef CY_CFG_SYSCLK_PLL5_ENABLED
-        Cy_SysClk_Pll5Init();
-    #endif
-    #ifdef CY_CFG_SYSCLK_PLL6_ENABLED
-        Cy_SysClk_Pll6Init();
-    #endif
-    #ifdef CY_CFG_SYSCLK_PLL7_ENABLED
-        Cy_SysClk_Pll7Init();
-    #endif
-    #ifdef CY_CFG_SYSCLK_PLL8_ENABLED
-        Cy_SysClk_Pll8Init();
-    #endif
-    #ifdef CY_CFG_SYSCLK_PLL9_ENABLED
-        Cy_SysClk_Pll9Init();
-    #endif
-    #ifdef CY_CFG_SYSCLK_PLL10_ENABLED
-        Cy_SysClk_Pll10Init();
-    #endif
-    #ifdef CY_CFG_SYSCLK_PLL11_ENABLED
-        Cy_SysClk_Pll11Init();
-    #endif
-    #ifdef CY_CFG_SYSCLK_PLL12_ENABLED
-       Cy_SysClk_Pll12Init();
-    #endif
-    #ifdef CY_CFG_SYSCLK_PLL13_ENABLED
-        Cy_SysClk_Pll13Init();
-    #endif
-    #ifdef CY_CFG_SYSCLK_PLL14_ENABLED
-        Cy_SysClk_Pll14Init();
-    #endif
+        /* Configure and enable FLL */
+        #ifdef CY_CFG_SYSCLK_FLL_ENABLED
+            Cy_SysClk_FllInit();
+        #endif
     
-    /* Configure HF clocks */
-    #ifdef CY_CFG_SYSCLK_CLKHF1_ENABLED
-        Cy_SysClk_ClkHf1Init();
-    #endif
-    #ifdef CY_CFG_SYSCLK_CLKHF2_ENABLED
-        Cy_SysClk_ClkHf2Init();
-    #endif
-    #ifdef CY_CFG_SYSCLK_CLKHF3_ENABLED
-        Cy_SysClk_ClkHf3Init();
-    #endif
-    #ifdef CY_CFG_SYSCLK_CLKHF4_ENABLED
-        Cy_SysClk_ClkHf4Init();
-    #endif
-    #ifdef CY_CFG_SYSCLK_CLKHF5_ENABLED
-        Cy_SysClk_ClkHf5Init();
-    #endif
-    #ifdef CY_CFG_SYSCLK_CLKHF6_ENABLED
-        Cy_SysClk_ClkHf6Init();
-    #endif
-    #ifdef CY_CFG_SYSCLK_CLKHF7_ENABLED
-        Cy_SysClk_ClkHf7Init();
-    #endif
-    #ifdef CY_CFG_SYSCLK_CLKHF8_ENABLED
-        Cy_SysClk_ClkHf8Init();
-    #endif
-    #ifdef CY_CFG_SYSCLK_CLKHF9_ENABLED
-        Cy_SysClk_ClkHf9Init();
-    #endif
-    #ifdef CY_CFG_SYSCLK_CLKHF10_ENABLED
-        Cy_SysClk_ClkHf10Init();
-    #endif
-    #ifdef CY_CFG_SYSCLK_CLKHF11_ENABLED
-        Cy_SysClk_ClkHf11Init();
-    #endif
-    #ifdef CY_CFG_SYSCLK_CLKHF12_ENABLED
-        Cy_SysClk_ClkHf12Init();
-    #endif
-    #ifdef CY_CFG_SYSCLK_CLKHF13_ENABLED
-        Cy_SysClk_ClkHf13Init();
-    #endif
-    #ifdef CY_CFG_SYSCLK_CLKHF14_ENABLED
-        Cy_SysClk_ClkHf14Init();
-    #endif
-    #ifdef CY_CFG_SYSCLK_CLKHF15_ENABLED
-        Cy_SysClk_ClkHf15Init();
-    #endif
+        Cy_SysClk_ClkHf0Init();
     
-    /* Configure miscellaneous clocks */
+        #if ((CY_CFG_SYSCLK_CLKPATH0_SOURCE_NUM == 0x6UL) && (CY_CFG_SYSCLK_CLKHF0_CLKPATH_NUM == 0U))
+            #ifdef CY_CFG_SYSCLK_CLKPATH1_ENABLED
+                /* Apply the ClkPath1 user setting */
+                Cy_SysClk_ClkPath1Init();
+            #endif
+        #endif
+    
+        /* Configure and enable PLLs */
+        #ifdef CY_CFG_SYSCLK_PLL0_ENABLED
+            Cy_SysClk_Pll0Init();
+        #endif
+        #ifdef CY_CFG_SYSCLK_PLL1_ENABLED
+            Cy_SysClk_Pll1Init();
+        #endif
+        #ifdef CY_CFG_SYSCLK_PLL2_ENABLED
+            Cy_SysClk_Pll2Init();
+        #endif
+        #ifdef CY_CFG_SYSCLK_PLL3_ENABLED
+            Cy_SysClk_Pll3Init();
+        #endif
+        #ifdef CY_CFG_SYSCLK_PLL4_ENABLED
+            Cy_SysClk_Pll4Init();
+        #endif
+        #ifdef CY_CFG_SYSCLK_PLL5_ENABLED
+            Cy_SysClk_Pll5Init();
+        #endif
+        #ifdef CY_CFG_SYSCLK_PLL6_ENABLED
+            Cy_SysClk_Pll6Init();
+        #endif
+        #ifdef CY_CFG_SYSCLK_PLL7_ENABLED
+            Cy_SysClk_Pll7Init();
+        #endif
+        #ifdef CY_CFG_SYSCLK_PLL8_ENABLED
+            Cy_SysClk_Pll8Init();
+        #endif
+        #ifdef CY_CFG_SYSCLK_PLL9_ENABLED
+            Cy_SysClk_Pll9Init();
+        #endif
+        #ifdef CY_CFG_SYSCLK_PLL10_ENABLED
+            Cy_SysClk_Pll10Init();
+        #endif
+        #ifdef CY_CFG_SYSCLK_PLL11_ENABLED
+            Cy_SysClk_Pll11Init();
+        #endif
+        #ifdef CY_CFG_SYSCLK_PLL12_ENABLED
+            Cy_SysClk_Pll12Init();
+        #endif
+        #ifdef CY_CFG_SYSCLK_PLL13_ENABLED
+            Cy_SysClk_Pll13Init();
+        #endif
+        #ifdef CY_CFG_SYSCLK_PLL14_ENABLED
+            Cy_SysClk_Pll14Init();
+        #endif
+    
+        /* Configure HF clocks */
+        #ifdef CY_CFG_SYSCLK_CLKHF1_ENABLED
+            Cy_SysClk_ClkHf1Init();
+        #endif
+        #ifdef CY_CFG_SYSCLK_CLKHF2_ENABLED
+            Cy_SysClk_ClkHf2Init();
+        #endif
+        #ifdef CY_CFG_SYSCLK_CLKHF3_ENABLED
+            Cy_SysClk_ClkHf3Init();
+        #endif
+        #ifdef CY_CFG_SYSCLK_CLKHF4_ENABLED
+            Cy_SysClk_ClkHf4Init();
+        #endif
+        #ifdef CY_CFG_SYSCLK_CLKHF5_ENABLED
+            Cy_SysClk_ClkHf5Init();
+        #endif
+        #ifdef CY_CFG_SYSCLK_CLKHF6_ENABLED
+            Cy_SysClk_ClkHf6Init();
+        #endif
+        #ifdef CY_CFG_SYSCLK_CLKHF7_ENABLED
+            Cy_SysClk_ClkHf7Init();
+        #endif
+        #ifdef CY_CFG_SYSCLK_CLKHF8_ENABLED
+            Cy_SysClk_ClkHf8Init();
+        #endif
+        #ifdef CY_CFG_SYSCLK_CLKHF9_ENABLED
+            Cy_SysClk_ClkHf9Init();
+        #endif
+        #ifdef CY_CFG_SYSCLK_CLKHF10_ENABLED
+            Cy_SysClk_ClkHf10Init();
+        #endif
+        #ifdef CY_CFG_SYSCLK_CLKHF11_ENABLED
+            Cy_SysClk_ClkHf11Init();
+        #endif
+        #ifdef CY_CFG_SYSCLK_CLKHF12_ENABLED
+            Cy_SysClk_ClkHf12Init();
+        #endif
+        #ifdef CY_CFG_SYSCLK_CLKHF13_ENABLED
+            Cy_SysClk_ClkHf13Init();
+        #endif
+        #ifdef CY_CFG_SYSCLK_CLKHF14_ENABLED
+            Cy_SysClk_ClkHf14Init();
+        #endif
+        #ifdef CY_CFG_SYSCLK_CLKHF15_ENABLED
+            Cy_SysClk_ClkHf15Init();
+        #endif
+    
+        /* Configure miscellaneous clocks */
         #ifdef CY_CFG_SYSCLK_CLKTIMER_ENABLED
             Cy_SysClk_ClkTimerInit();
         #endif
     
-    #ifdef CY_CFG_SYSCLK_CLKALTSYSTICK_ENABLED
-        Cy_SysClk_ClkAltSysTickInit();
-    #endif
+        #ifdef CY_CFG_SYSCLK_CLKALTSYSTICK_ENABLED
+            Cy_SysClk_ClkAltSysTickInit();
+        #endif
     
-    #ifdef CY_CFG_SYSCLK_CLKPUMP_ENABLED
-        Cy_SysClk_ClkPumpInit();
-    #endif
+        #ifdef CY_CFG_SYSCLK_CLKPUMP_ENABLED
+            Cy_SysClk_ClkPumpInit();
+        #endif
     
-    #ifdef CY_CFG_SYSCLK_CLKBAK_ENABLED
-        Cy_SysClk_ClkBakInit();
-    #endif
+        #ifdef CY_CFG_SYSCLK_CLKBAK_ENABLED
+            Cy_SysClk_ClkBakInit();
+        #endif
     
-    /* Configure default enabled clocks */
-    #ifdef CY_CFG_SYSCLK_ILO_ENABLED
-        Cy_SysClk_IloInit();
-    #endif
+        /* Configure default enabled clocks */
+        #ifdef CY_CFG_SYSCLK_ILO_ENABLED
+            Cy_SysClk_IloInit();
+        #endif
     
-    #ifndef CY_CFG_SYSCLK_IMO_ENABLED
-        #error the IMO must be enabled for proper chip operation
+        #ifndef CY_CFG_SYSCLK_IMO_ENABLED
+            #error the IMO must be enabled for proper chip operation
         #endif
     
         #ifndef CY_CFG_SYSCLK_CLKHF0_ENABLED
@@ -1129,19 +1164,28 @@ void init_cycfg_system(void)
     
     #endif /* (!defined(CY_DEVICE_SECURE)) */
     
-#if defined(CY_CFG_SYSCLK_ECO_PRESCALER_ENABLED)
-        Cy_SysClk_EcoPrescalerInit();
-#endif //defined(CY_CFG_SYSCLK_ECO_PRESCALER_ENABLED)
-}
 
-void reserve_cycfg_system(void)
-{
 #if defined (CY_USING_HAL)
     cyhal_hwmgr_reserve(&srss_0_clock_0_pathmux_0_obj);
+#endif //defined (CY_USING_HAL)
+
+#if defined (CY_USING_HAL)
     cyhal_hwmgr_reserve(&srss_0_clock_0_pathmux_1_obj);
+#endif //defined (CY_USING_HAL)
+
+#if defined (CY_USING_HAL)
     cyhal_hwmgr_reserve(&srss_0_clock_0_pathmux_2_obj);
+#endif //defined (CY_USING_HAL)
+
+#if defined (CY_USING_HAL)
     cyhal_hwmgr_reserve(&srss_0_clock_0_pathmux_3_obj);
+#endif //defined (CY_USING_HAL)
+
+#if defined (CY_USING_HAL)
     cyhal_hwmgr_reserve(&srss_0_clock_0_pathmux_4_obj);
+#endif //defined (CY_USING_HAL)
+
+#if defined (CY_USING_HAL)
     cyhal_hwmgr_reserve(&srss_0_clock_0_pathmux_5_obj);
 #endif //defined (CY_USING_HAL)
 }

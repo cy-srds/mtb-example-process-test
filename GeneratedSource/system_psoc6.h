@@ -1,6 +1,6 @@
 /***************************************************************************//**
 * \file system_psoc6.h
-* \version 2.95.1
+* \version 2.91
 *
 * \brief Device system header file.
 *
@@ -27,7 +27,7 @@
 #define _SYSTEM_PSOC6_H_
 
 /**
-* \addtogroup group_system_config_cm4
+* \addtogroup group_system_config
 * \{
 * Provides device startup, system configuration, and linker script files.
 * The system startup provides the followings features:
@@ -69,7 +69,7 @@
 * Cy_SysEnableCM4() function call.
 * By default, the COMPONENT_CM0P_SLEEP prebuilt image is used for the CM0p core.
 * More about CM0+ prebuilt images, see here:
-* https://github.com/Infineon/psoc6cm0p
+* https://github.com/cypresssemiconductorco/psoc6cm0p
 *
 * Change the flash and RAM sizes by editing the macros value in the
 * linker files for both CPUs:
@@ -106,7 +106,7 @@
 * Cy_SysEnableCM4() function call.
 * By default, the COMPONENT_CM0P_SLEEP prebuilt image is used for the CM0p core.
 * More about CM0+ prebuilt images, see here:
-* https://github.com/Infineon/psoc6cm0p
+* https://github.com/cypresssemiconductorco/psoc6cm0p
 *
 * \note The linker files provided with the PDL are generic and handle all common
 * use cases. Your project may not use every section defined in the linker files.
@@ -156,7 +156,7 @@
 * Cy_SysEnableCM4() function call.
 * By default, the COMPONENT_CM0P_SLEEP prebuilt image is used for the CM0p core.
 * More about CM0+ prebuilt images, see here:
-* https://github.com/Infineon/psoc6cm0p
+* https://github.com/cypresssemiconductorco/psoc6cm0p
 *
 * Change the flash and RAM sizes by editing the macros value in the
 * linker files for both CPUs:
@@ -240,7 +240,7 @@
 * clib-support library that provides newlib-compatible implementations of
 * 'sbrk', '__malloc_lock' and '__malloc_unlock':
 * <br>
-* https://github.com/Infineon/clib-support.
+* https://github.com/cypresssemiconductorco/clib-support.
 *
 * \subsubsection group_system_config_heap_stack_config_mdk ARM Compiler
 * - <b>Editing source code files</b>\n
@@ -332,16 +332,6 @@
 *       <th>Version</th>
 *       <th>Changes</th>
 *       <th>Reason for Change</th>
-*   </tr>
-*   <tr>
-*       <td rowspan="1">2.95.1</td>
-*       <td>Restructured documentation.</td>
-*       <td>Documentation update.</td>
-*   </tr>
-*   <tr>
-*       <td rowspan="1">2.95</td>
-*       <td>Update FPU enable function with CMSIS macros to disable/enable interrupts</td>
-*       <td>Move to stadnard inline CMSIS ARM macros</td>
 *   </tr>
 *   <tr>
 *       <td rowspan="2">2.91</td>
@@ -483,18 +473,30 @@
 * </table>
 *
 *
-* \defgroup group_system_config_macro Macros
+* \defgroup group_system_config_macro Macro
 * \{
-*   \defgroup group_system_config_system_macro            System Macros
-*   \defgroup group_system_config_cm4_status_macro        Cortex-M4 Status Macros
-*   \defgroup group_system_config_user_settings_macro     User Settings Macros
+*   \defgroup group_system_config_system_macro            System
+*   \defgroup group_system_config_cm4_status_macro        Cortex-M4 Status
+*   \defgroup group_system_config_user_settings_macro     User Settings
 * \}
 * \defgroup group_system_config_functions Functions
 * \{
-*   \defgroup group_system_config_cm4_functions           Cortex-M4 Control Functions
+*   \defgroup group_system_config_system_functions        System
+*   \defgroup group_system_config_cm4_functions           Cortex-M4 Control
 * \}
 * \defgroup group_system_config_globals Global Variables
 *
+* \}
+*/
+
+/**
+* \addtogroup group_system_config_system_functions
+* \{
+*   \details
+*   The following system functions implement CMSIS Core functions.
+*   Refer to the [CMSIS documentation]
+*   (http://www.keil.com/pack/doc/CMSIS/Core/html/group__system__init__gr.html "System and Clock Configuration")
+*   for more details.
 * \}
 */
 
@@ -598,7 +600,10 @@ extern "C" {
 /** \} group_system_config_system_macro */
 
 
-/** \cond */
+/**
+* \addtogroup group_system_config_system_functions
+* \{
+*/
 #if defined(__ARMCC_VERSION)
     extern void SystemInit(void) __attribute__((constructor));
 #else
@@ -606,7 +611,7 @@ extern "C" {
 #endif /* (__ARMCC_VERSION) */
 
 extern void SystemCoreClockUpdate(void);
-/** \endcond */
+/** \} group_system_config_system_functions */
 
 
 /**
@@ -632,6 +637,7 @@ extern void     Cy_SystemInitFpuEnable(void);
 
 extern uint32_t cy_delayFreqKhz;
 extern uint8_t  cy_delayFreqMhz;
+extern uint32_t cy_delay32kMs;
 /** \endcond */
 
 
@@ -690,22 +696,20 @@ extern uint8_t  cy_delayFreqMhz;
 /******************************************************************************/
 
 
-
 /** \addtogroup group_system_config_globals
 * \{
 */
-extern uint32_t cy_BleEcoClockFreqHz;
-/** \} group_system_config_globals */
 
-/** \cond INTERNAL */
+extern uint32_t SystemCoreClock;
+extern uint32_t cy_BleEcoClockFreqHz;
 extern uint32_t cy_Hfclk0FreqHz;
 extern uint32_t cy_PeriClkFreqHz;
-extern uint32_t SystemCoreClock;
-extern uint32_t cy_AhbFreqHz;
+
+/** \} group_system_config_globals */
 
 
 
-
+/** \cond INTERNAL */
 /*******************************************************************************
 * Backward compatibility macros. The following code is DEPRECATED and must
 * not be used in new projects

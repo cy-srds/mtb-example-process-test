@@ -4,9 +4,10 @@
 * Description:
 * Pin configuration
 * This file was automatically generated and should not be modified.
-* Configurator Backend 3.0.0
-* device-db 4.1.0.3253
-* mtb-pdl-cat1 3.3.0.20630
+* Tools Package 2.4.1.9711
+* mtb-pdl-cat1 2.4.1.17937
+* personalities 6.0.0.0
+* udd 3.0.0.2024
 *
 ********************************************************************************
 * Copyright 2023 Cypress Semiconductor Corporation (an Infineon company) or
@@ -416,29 +417,72 @@ const cy_stc_gpio_pin_config_t CYBSP_CSD_SLD4_config =
 
 void init_cycfg_pins(void)
 {
-    Cy_GPIO_Pin_Init(CYBSP_SWO_PORT, CYBSP_SWO_PIN, &CYBSP_SWO_config);
-    Cy_GPIO_Pin_Init(CYBSP_SWDIO_PORT, CYBSP_SWDIO_PIN, &CYBSP_SWDIO_config);
-    Cy_GPIO_Pin_Init(CYBSP_SWDCK_PORT, CYBSP_SWDCK_PIN, &CYBSP_SWDCK_config);
-}
-
-void reserve_cycfg_pins(void)
-{
+    Cy_GPIO_Pin_Init(CYBSP_WCO_IN_PORT, CYBSP_WCO_IN_PIN, &CYBSP_WCO_IN_config);
 #if defined (CY_USING_HAL)
     cyhal_hwmgr_reserve(&CYBSP_WCO_IN_obj);
+#endif //defined (CY_USING_HAL)
+
+    Cy_GPIO_Pin_Init(CYBSP_WCO_OUT_PORT, CYBSP_WCO_OUT_PIN, &CYBSP_WCO_OUT_config);
+#if defined (CY_USING_HAL)
     cyhal_hwmgr_reserve(&CYBSP_WCO_OUT_obj);
+#endif //defined (CY_USING_HAL)
+
+#if defined (CY_USING_HAL)
     cyhal_hwmgr_reserve(&CYBSP_CSD_TX_obj);
+#endif //defined (CY_USING_HAL)
+
+    Cy_GPIO_Pin_Init(CYBSP_SWO_PORT, CYBSP_SWO_PIN, &CYBSP_SWO_config);
+#if defined (CY_USING_HAL)
     cyhal_hwmgr_reserve(&CYBSP_SWO_obj);
+#endif //defined (CY_USING_HAL)
+
+    Cy_GPIO_Pin_Init(CYBSP_SWDIO_PORT, CYBSP_SWDIO_PIN, &CYBSP_SWDIO_config);
+#if defined (CY_USING_HAL)
     cyhal_hwmgr_reserve(&CYBSP_SWDIO_obj);
+#endif //defined (CY_USING_HAL)
+
+    Cy_GPIO_Pin_Init(CYBSP_SWDCK_PORT, CYBSP_SWDCK_PIN, &CYBSP_SWDCK_config);
+#if defined (CY_USING_HAL)
     cyhal_hwmgr_reserve(&CYBSP_SWDCK_obj);
+#endif //defined (CY_USING_HAL)
+
+#if defined (CY_USING_HAL)
     cyhal_hwmgr_reserve(&CYBSP_CINA_obj);
+#endif //defined (CY_USING_HAL)
+
+#if defined (CY_USING_HAL)
     cyhal_hwmgr_reserve(&CYBSP_CINB_obj);
+#endif //defined (CY_USING_HAL)
+
+#if defined (CY_USING_HAL)
     cyhal_hwmgr_reserve(&CYBSP_CMOD_obj);
+#endif //defined (CY_USING_HAL)
+
+#if defined (CY_USING_HAL)
     cyhal_hwmgr_reserve(&CYBSP_CSD_BTN0_obj);
+#endif //defined (CY_USING_HAL)
+
+#if defined (CY_USING_HAL)
     cyhal_hwmgr_reserve(&CYBSP_CSD_BTN1_obj);
+#endif //defined (CY_USING_HAL)
+
+#if defined (CY_USING_HAL)
     cyhal_hwmgr_reserve(&CYBSP_CSD_SLD0_obj);
+#endif //defined (CY_USING_HAL)
+
+#if defined (CY_USING_HAL)
     cyhal_hwmgr_reserve(&CYBSP_CSD_SLD1_obj);
+#endif //defined (CY_USING_HAL)
+
+#if defined (CY_USING_HAL)
     cyhal_hwmgr_reserve(&CYBSP_CSD_SLD2_obj);
+#endif //defined (CY_USING_HAL)
+
+#if defined (CY_USING_HAL)
     cyhal_hwmgr_reserve(&CYBSP_CSD_SLD3_obj);
+#endif //defined (CY_USING_HAL)
+
+#if defined (CY_USING_HAL)
     cyhal_hwmgr_reserve(&CYBSP_CSD_SLD4_obj);
 #endif //defined (CY_USING_HAL)
 }

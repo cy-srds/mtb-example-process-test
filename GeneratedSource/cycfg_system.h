@@ -4,9 +4,10 @@
 * Description:
 * System configuration
 * This file was automatically generated and should not be modified.
-* Configurator Backend 3.0.0
-* device-db 4.1.0.3253
-* mtb-pdl-cat1 3.3.0.20630
+* Tools Package 2.4.1.9711
+* mtb-pdl-cat1 2.4.1.17937
+* personalities 6.0.0.0
+* udd 3.0.0.2024
 *
 ********************************************************************************
 * Copyright 2023 Cypress Semiconductor Corporation (an Infineon company) or
@@ -85,15 +86,24 @@ extern "C" {
 
 #if defined (CY_USING_HAL)
     extern const cyhal_resource_inst_t srss_0_clock_0_pathmux_0_obj;
+#endif //defined (CY_USING_HAL)
+#if defined (CY_USING_HAL)
     extern const cyhal_resource_inst_t srss_0_clock_0_pathmux_1_obj;
+#endif //defined (CY_USING_HAL)
+#if defined (CY_USING_HAL)
     extern const cyhal_resource_inst_t srss_0_clock_0_pathmux_2_obj;
+#endif //defined (CY_USING_HAL)
+#if defined (CY_USING_HAL)
     extern const cyhal_resource_inst_t srss_0_clock_0_pathmux_3_obj;
+#endif //defined (CY_USING_HAL)
+#if defined (CY_USING_HAL)
     extern const cyhal_resource_inst_t srss_0_clock_0_pathmux_4_obj;
+#endif //defined (CY_USING_HAL)
+#if defined (CY_USING_HAL)
     extern const cyhal_resource_inst_t srss_0_clock_0_pathmux_5_obj;
 #endif //defined (CY_USING_HAL)
 
 void init_cycfg_system(void);
-void reserve_cycfg_system(void);
 
 #if defined(__cplusplus)
 }
