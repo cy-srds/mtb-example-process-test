@@ -5,9 +5,9 @@
 * System configuration
 * This file was automatically generated and should not be modified.
 * Tools Package 2.4.1.9711
-* mtb-pdl-cat1 2.4.1.17937
-* personalities 6.0.0.0
-* udd 3.0.0.2024
+* mtb-pdl-cat1 2.3.0.11018
+* personalities 4.0.0.0
+* udd 3.0.0.1445
 *
 ********************************************************************************
 * Copyright 2023 Cypress Semiconductor Corporation (an Infineon company) or
@@ -797,33 +797,31 @@ __WEAK void __NO_RETURN cycfg_ClockStartupError(uint32_t error)
                  #else /* CY_CFG_SYSCLK_WCO_ENABLED */
                      (void) Cy_SysLib_ResetBackupDomain();
                  #endif /* CY_CFG_SYSCLK_WCO_ENABLED */
-                    Cy_SysClk_IloDisable();
-                    Cy_SysClk_IloInit();
-                }
-            #endif /* CY_CFG_SYSCLK_ILO_ENABLED */
-        #endif /* CY_CFG_PWR_VBACKUP_USING_VDDD */
-        /* Configure core regulator */
+                     Cy_SysClk_IloDisable();
+                     Cy_SysClk_IloInit();
+                 }
+             #endif /* CY_CFG_SYSCLK_ILO_ENABLED */
+         #endif /* CY_CFG_PWR_VBACKUP_USING_VDDD */
+         /* Configure core regulator */
         #if !(defined(CY_DEVICE_SECURE))
-            #if defined (CY_IP_M4CPUSS)
-                #if CY_CFG_PWR_USING_LDO
-                    Cy_SysPm_LdoSetVoltage(CY_SYSPM_LDO_VOLTAGE_LP);
-                #else
-                    Cy_SysPm_BuckEnable(CY_SYSPM_BUCK_OUT1_VOLTAGE_LP);
-                #endif /* CY_CFG_PWR_USING_LDO */
-            #endif /* defined (CY_IP_M4CPUSS) */
-            #if CY_CFG_PWR_REGULATOR_MODE_MIN
-                Cy_SysPm_SystemSetMinRegulatorCurrent();
-            #else
-                Cy_SysPm_SystemSetNormalRegulatorCurrent();
-            #endif /* CY_CFG_PWR_REGULATOR_MODE_MIN */
+             #if CY_CFG_PWR_USING_LDO
+                 Cy_SysPm_LdoSetVoltage(CY_SYSPM_LDO_VOLTAGE_LP);
+             #else
+                 Cy_SysPm_BuckEnable(CY_SYSPM_BUCK_OUT1_VOLTAGE_LP);
+             #endif /* CY_CFG_PWR_USING_LDO */
+             #if CY_CFG_PWR_REGULATOR_MODE_MIN
+                 Cy_SysPm_SystemSetMinRegulatorCurrent();
+             #else
+                 Cy_SysPm_SystemSetNormalRegulatorCurrent();
+             #endif /* CY_CFG_PWR_REGULATOR_MODE_MIN */
         #endif /* !(defined(CY_DEVICE_SECURE)) */
-        /* Configure PMIC */
-        Cy_SysPm_UnlockPmic();
-        #if CY_CFG_PWR_USING_PMIC
-            Cy_SysPm_PmicEnableOutput();
-        #else
-            Cy_SysPm_PmicDisableOutput();
-        #endif /* CY_CFG_PWR_USING_PMIC */
+         /* Configure PMIC */
+         Cy_SysPm_UnlockPmic();
+         #if CY_CFG_PWR_USING_PMIC
+             Cy_SysPm_PmicEnableOutput();
+         #else
+             Cy_SysPm_PmicDisableOutput();
+         #endif /* CY_CFG_PWR_USING_PMIC */
     }
 #endif //(!defined(CY_DEVICE_SECURE))
 
@@ -913,11 +911,9 @@ void init_cycfg_system(void)
             Cy_SysClk_ClkLfInit();
         #endif
     
-        #if (defined(CY_IP_M4CPUSS) && CY_CFG_SYSCLK_ALTHF_ENABLED)
-
+        #ifdef CY_CFG_SYSCLK_ALTHF_ENABLED
             Cy_SysClk_AltHfInit();
-        #endif /* (defined(CY_IP_M4CPUSS) && CY_CFG_SYSCLK_ALTHF_ENABLED */
-
+        #endif
     
         #ifdef CY_CFG_SYSCLK_ECO_ENABLED
             Cy_SysClk_EcoInit();

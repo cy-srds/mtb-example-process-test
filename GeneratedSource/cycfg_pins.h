@@ -5,9 +5,9 @@
 * Pin configuration
 * This file was automatically generated and should not be modified.
 * Tools Package 2.4.1.9711
-* mtb-pdl-cat1 2.4.1.17937
-* personalities 6.0.0.0
-* udd 3.0.0.2024
+* mtb-pdl-cat1 2.3.0.11018
+* personalities 4.0.0.0
+* udd 3.0.0.1445
 *
 ********************************************************************************
 * Copyright 2023 Cypress Semiconductor Corporation (an Infineon company) or

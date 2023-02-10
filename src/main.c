@@ -141,9 +141,7 @@ int main(void)
     __enable_irq();
 
     initialize_led();
-    printk("***** LED initialized *****\r\n");
     initialize_capsense_tuner();
-    printk("***** CAPSENSE Tuner initialized *****\r\n");
     result = initialize_capsense();
 
     if (CYRET_SUCCESS != result)
@@ -151,7 +149,6 @@ int main(void)
         /* Halt the CPU if CAPSENSE initialization failed */
         CY_ASSERT(0);
     }
-    printk("***** CAPSENSE initialized *****\r\n");
 
     /* Initiate first scan */
     Cy_CapSense_ScanAllWidgets(&cy_capsense_context);
@@ -165,7 +162,6 @@ int main(void)
 
             /* Process touch input */
             process_touch();
-            printk("Touch detected and processed!\r\n");
 
             /* Establishes synchronized operation between the CAPSENSE
              * middleware and the CAPSENSE Tuner tool.
