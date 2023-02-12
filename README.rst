@@ -32,4 +32,4 @@ In this example we will build it for the cy8cproto_062_4343w board:
 
 2. To test the application, touch CAPSENSE&trade; button 1 (BTN1) to turn the LED OFF, touch CAPSENSE&trade; Button 0 (BTN0) to turn the LED ON, and touch the slider in different positions to change the brightness.
 
-5. You can also monitor the CAPSENSE&trade; data using the CAPSENSE&trade; Tuner application.
+3. You can also monitor the CAPSENSE&trade; data using the CAPSENSE&trade; Tuner application.

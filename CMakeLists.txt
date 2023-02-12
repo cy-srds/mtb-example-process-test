@@ -15,6 +15,9 @@ zephyr_include_directories(${CAPSENSE_LIB_DIR})
 FILE(GLOB capsense_sources ${CAPSENSE_LIB_DIR}/*.c)
 zephyr_library_sources(${capsense_sources} ${PDL_DRIVER_DIR}/cy_csd.c)
 
+add_definitions( -DCOMPONENT_CUSTOM_DESIGN_MODUS )
+add_definitions( -DCMAKE_ECLIPSE_VERSION=4.17 )
+
 zephyr_include_directories(GeneratedSource src)
 FILE(GLOB app_sources GeneratedSource/*c src/*.c)
 target_sources(app PRIVATE ${app_sources})
