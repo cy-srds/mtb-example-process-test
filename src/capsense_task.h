@@ -1,7 +1,8 @@
 /******************************************************************************
-* File Name: led.h
+* File Name: capsense_task.h
 *
-* Description: This file is the public interface of led.c source file.
+* Description: This file is the public interface of capsense_task.c source
+*              file.
 *
 * Related Document: README.md
 *
@@ -38,42 +39,42 @@
 * so agrees to indemnify Cypress against all liability.
 *******************************************************************************/
 
-/*******************************************************************************
-* Include guard
-*******************************************************************************/
-#ifndef SOURCE_LED_H_
-#define SOURCE_LED_H_
 
 /*******************************************************************************
-* Global constants
-*******************************************************************************/
-/* Allowed duty cycle for maximum brightness */
-#define LED_MAX_BRIGHTNESS      (100u)
+ *  Include guard
+ ******************************************************************************/
+#ifndef SOURCE_CAPSENSE_TASK_H_
+#define SOURCE_CAPSENSE_TASK_H_
 
-/* Allowed duty cycle for minimum brightness*/
-#define LED_MIN_BRIGHTNESS      (2u)
 
 /*******************************************************************************
-* Structures and enumerations
-*******************************************************************************/
+ * Header file includes
+ ******************************************************************************/
+#include <zephyr/kernel.h>
+
+
+/*******************************************************************************
+ * Enumeration
+ ******************************************************************************/
 typedef enum
 {
-    LED_OFF,
-    LED_ON
-} led_state_t;
+    CAPSENSE_SCAN,
+    CAPSENSE_PROCESS
+} capsense_command_t;
 
-typedef struct
-{
-    led_state_t state;
-    uint32_t brightness;
-} led_data_t;
 
 /*******************************************************************************
-* Function prototypes
-*******************************************************************************/
-cy_rslt_t initialize_led(void);
-void update_led_state(led_data_t *led_data);
+ * Global variable
+ ******************************************************************************/
 
-#endif /* SOURCE_LED_H_ */
 
-/* [] END OF FILE */
+/*******************************************************************************
+ * Function prototype
+ ******************************************************************************/
+void task_capsense(void* param);
+
+
+#endif /* SOURCE_CAPSENSE_TASK_H_ */
+
+
+/* END OF FILE [] */

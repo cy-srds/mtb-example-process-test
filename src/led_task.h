@@ -1,7 +1,7 @@
 /******************************************************************************
-* File Name: led.c
+* File Name: led_task.h
 *
-* Description: This file contains source code that controls LED.
+* Description: This file is the public interface of led_task.c source file
 *
 * Related Document: README.md
 *
@@ -38,97 +38,62 @@
 * so agrees to indemnify Cypress against all liability.
 *******************************************************************************/
 
+
 /*******************************************************************************
-* Header files includes
-*******************************************************************************/
-#include "cybsp.h"
-#include "cyhal.h"
-#include "cycfg.h"
-#include "led.h"
+ * Include guard
+ ******************************************************************************/
+#ifndef SOURCE_LED_TASK_H_
+#define SOURCE_LED_TASK_H_
+
+
+/*******************************************************************************
+ * Header file includes
+ ******************************************************************************/
+#include <zephyr/kernel.h>
+
 
 /*******************************************************************************
 * Global constants
 *******************************************************************************/
-#define PWM_LED_FREQ_HZ    (1000000lu)  /* in Hz */
-#define GET_DUTY_CYCLE(x)    (100 - x)
+/* Allowed TCPWM compare value for maximum brightness */
+#define LED_MAX_BRIGHTNESS  (100u)
+
+/* Allowed TCPWM compare value for minimum brightness*/
+#define LED_MIN_BRIGHTNESS  (2u)
+
 
 /*******************************************************************************
-* Global constants
-*******************************************************************************/
-led_state_t led_state_cur = LED_OFF;
-cyhal_pwm_t pwm_led;
-
-/*******************************************************************************
-* Function Name: update_led_state
-********************************************************************************
-* Summary:
-*  This function updates the LED state, based on the touch input.
-*
-* Parameter:
-*  ledData: the pointer to the LED data structure
-*
-*******************************************************************************/
-void update_led_state(led_data_t *ledData)
+ * Data structure and enumeration
+ ******************************************************************************/
+/* Available LED commands */
+typedef enum
 {
-    if ((led_state_cur == LED_OFF) && (ledData->state == LED_ON))
-    {
-        cyhal_pwm_start(&pwm_led);
-        led_state_cur = LED_ON;
-        ledData->brightness = LED_MAX_BRIGHTNESS;
-    }
-    else if ((led_state_cur == LED_ON) && (ledData->state == LED_OFF))
-    {
-        cyhal_pwm_stop(&pwm_led);
-        led_state_cur = LED_OFF;
-        ledData->brightness = 0;
-    }
-    else
-    {
-    }
+    LED_TURN_ON,
+    LED_TURN_OFF,
+    LED_UPDATE_BRIGHTNESS,
+} led_command_t;
 
-    if ((LED_ON == led_state_cur) || ((LED_OFF == led_state_cur) && (ledData->brightness > 0)))
-    {
-        cyhal_pwm_start(&pwm_led);
-        uint32_t brightness = (ledData->brightness < LED_MIN_BRIGHTNESS) ? LED_MIN_BRIGHTNESS : ledData->brightness;
+/* Structure used for storing LED data */
+typedef struct
+{
+    led_command_t command;
+    uint32_t brightness;
+} led_command_data_t;
 
-        /* Drive the LED with brightness */
-        cyhal_pwm_set_duty_cycle(&pwm_led, GET_DUTY_CYCLE(brightness),
-                                 PWM_LED_FREQ_HZ);
-        led_state_cur = LED_ON;
-    }
-}
 
 /*******************************************************************************
-* Function Name: initialize_led
-********************************************************************************
-* Summary:
-*  Initializes a PWM resource for driving an LED.
-*
-*******************************************************************************/
-cy_rslt_t initialize_led(void)
-{
-    cy_rslt_t rslt;
+ * Global variable
+ ******************************************************************************/
+extern struct k_queue led_command_data_q;
 
-    rslt = cyhal_pwm_init(&pwm_led, CYBSP_USER_LED, NULL);
 
-    if (CY_RSLT_SUCCESS == rslt)
-    {
-        rslt = cyhal_pwm_set_duty_cycle(&pwm_led,
-                                        GET_DUTY_CYCLE(LED_MAX_BRIGHTNESS),
-                                        PWM_LED_FREQ_HZ);
-        if (CY_RSLT_SUCCESS == rslt)
-        {
-            rslt = cyhal_pwm_start(&pwm_led);
-        }
+/*******************************************************************************
+ * Function prototype
+ ******************************************************************************/
+void task_led(void* param);
 
-    }
 
-    if (CY_RSLT_SUCCESS == rslt)
-    {
-        led_state_cur = LED_ON;
-    }
+#endif /* SOURCE_LED_TASK_H_ */
 
-    return rslt;
-}
 
-/* [] END OF FILE */
+/* [] END OF FILE  */
