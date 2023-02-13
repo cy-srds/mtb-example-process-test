@@ -82,7 +82,7 @@ void task_led(void* param)
     led_command_data_t *led_cmd_data;
 
     /* Suppress warning for unused parameter */
-    (void)param;
+    ARG_UNUSED(param);
 
     /* Initialize a PWM resource for driving an LED. */
     cyhal_pwm_init(&pwm_led, CYBSP_USER_LED, NULL);

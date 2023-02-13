@@ -68,7 +68,7 @@ static void tuner_init(void);
 static void process_touch(void);
 static void capsense_isr(void);
 static void capsense_end_of_scan_callback(cy_stc_active_scan_sns_t* active_scan_sns_ptr);
-static void capsense_timer_callback(struct k_timer *dummy);
+static void capsense_timer_callback(struct k_timer *params);
 void handle_error(void);
 
 
@@ -139,7 +139,7 @@ void task_capsense(void* param)
     capsense_command_t *capsense_cmd;
 
     /* Remove warning for unused parameter */
-    (void)param;
+    ARG_UNUSED(param);
 
     /* Setup communication between Tuner GUI and PSoC 6 MCU */
     tuner_init();
@@ -191,13 +191,6 @@ void task_capsense(void* param)
                     break;
                 }
             }
-        }
-        /* Task has timed out and received no data during an interval of
-         * portMAXDELAY ticks.
-         */
-        else
-        {
-            /* Handle timeout here */
         }
     }
 }
@@ -366,15 +359,15 @@ static void capsense_end_of_scan_callback(cy_stc_active_scan_sns_t* active_scan_
 *  scan.
 *
 * Parameters:
-*  struct k_timer dummy (unused)
+*  struct k_timer params (unused)
 *
 *******************************************************************************/
-static void capsense_timer_callback(struct k_timer *dummy)
+static void capsense_timer_callback(struct k_timer *params)
 {
     Cy_CapSense_Wakeup(&cy_capsense_context);
     capsense_command_t command = CAPSENSE_SCAN;
 
-    ARG_UNUSED(dummy);
+    ARG_UNUSED(params);
 
     /* Send command to start CAPSENSE scan */
     k_queue_append(&capsense_command_q, &command);

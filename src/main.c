@@ -62,8 +62,8 @@
 #define TASK_LED_PRIORITY        (5u)
 
 /* Stack sizes of user tasks in this project */
-#define TASK_CAPSENSE_STACK_SIZE (256u)
-#define TASK_LED_STACK_SIZE      (128u)
+#define TASK_CAPSENSE_STACK_SIZE (1024u)
+#define TASK_LED_STACK_SIZE      (512u)
 
 
 /*******************************************************************************
@@ -110,4 +110,4 @@ K_THREAD_DEFINE(task_led_id, TASK_LED_STACK_SIZE, task_led,
             NULL, NULL, NULL, TASK_LED_PRIORITY, 0, 0);
 
 
-/* [] END OF FILE  */
+/* [] END OF FILE */

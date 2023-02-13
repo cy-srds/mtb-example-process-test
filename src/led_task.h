@@ -96,4 +96,4 @@ void task_led(void* param);
 #endif /* SOURCE_LED_TASK_H_ */
 
 
-/* [] END OF FILE  */
+/* [] END OF FILE */
