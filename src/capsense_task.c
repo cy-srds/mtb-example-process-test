@@ -79,7 +79,9 @@ cy_stc_scb_ezi2c_context_t ezi2c_context;
 cyhal_ezi2c_t sEzI2C;
 cyhal_ezi2c_slave_cfg_t sEzI2C_sub_cfg;
 cyhal_ezi2c_cfg_t sEzI2C_cfg;
-K_QUEUE_DEFINE(capsense_command_q);
+
+/* Queue handle used for LED data */
+K_FIFO_DEFINE(capsense_command_q);
 /* Initialize timer for periodic CAPSENSE scan */
 K_TIMER_DEFINE(scan_timer_handle, capsense_timer_callback, NULL);
 
@@ -133,13 +135,15 @@ void handle_error(void)
 *  void *param : Task parameter defined during task creation (unused)
 *
 *******************************************************************************/
-void task_capsense(void* param)
+void task_capsense(void *dummy1, void *dummy2, void *dummy3)
 {
     cy_status status;
     capsense_command_t *capsense_cmd;
 
     /* Remove warning for unused parameter */
-    ARG_UNUSED(param);
+    ARG_UNUSED(dummy1);
+	ARG_UNUSED(dummy2);
+	ARG_UNUSED(dummy3);
 
     /* Setup communication between Tuner GUI and PSoC 6 MCU */
     tuner_init();
@@ -152,14 +156,14 @@ void task_capsense(void* param)
     }
 
     /* Start the timer */
-    k_timer_start(&scan_timer_handle,
-                    K_SECONDS(CAPSENSE_SCAN_INTERVAL_MS), K_NO_WAIT);
+    k_timer_start(&scan_timer_handle, K_NO_WAIT,
+                    K_MSEC(CAPSENSE_SCAN_INTERVAL_MS));
 
     /* Repeatedly running part of the task */
     for(;;)
     {
         /* Block until a CAPSENSE command has been received over queue */
-        capsense_cmd = k_queue_get(&capsense_command_q, K_FOREVER);
+        capsense_cmd = k_fifo_get(&capsense_command_q, K_FOREVER);
 
         /* Command has been received from capsense_cmd */
         /* Check if CAPSENSE is busy with a previous scan */
@@ -268,7 +272,7 @@ static void process_touch(void)
     /* Send command to update LED state if required */
     if(send_led_command)
     {
-        k_queue_append(&led_command_data_q, &led_cmd_data);
+        k_fifo_put(&led_command_data_q, &led_cmd_data);
     }
 
     /* Update previous touch status */
@@ -311,16 +315,14 @@ static uint32_t capsense_init(void)
 
     /* Initialize the CAPSENSE deep sleep callback functions. */
     Cy_CapSense_Enable(&cy_capsense_context);
-    Cy_SysPm_RegisterCallback(&capsense_deep_sleep_cb);
-    /* Register end of scan callback */
-    status = Cy_CapSense_RegisterCallback(CY_CAPSENSE_END_OF_SCAN_E,
-                                              capsense_end_of_scan_callback, &cy_capsense_context);
     if (CYRET_SUCCESS != status)
     {
         return status;
     }
-    /* Initialize the CAPSENSE firmware modules. */
-    status = Cy_CapSense_Enable(&cy_capsense_context);
+    Cy_SysPm_RegisterCallback(&capsense_deep_sleep_cb);
+    /* Register end of scan callback */
+    status = Cy_CapSense_RegisterCallback(CY_CAPSENSE_END_OF_SCAN_E,
+                                              capsense_end_of_scan_callback, &cy_capsense_context);
     if (CYRET_SUCCESS != status)
     {
         return status;
@@ -346,8 +348,8 @@ static void capsense_end_of_scan_callback(cy_stc_active_scan_sns_t* active_scan_
     ARG_UNUSED(active_scan_sns_ptr);
 
     /* Send command to process CAPSENSE data */
-    capsense_command_t command = CAPSENSE_PROCESS;
-    k_queue_append(&capsense_command_q, &command);
+    static capsense_command_t command = CAPSENSE_PROCESS;
+    k_fifo_put(&capsense_command_q, &command);
 }
 
 
@@ -359,18 +361,18 @@ static void capsense_end_of_scan_callback(cy_stc_active_scan_sns_t* active_scan_
 *  scan.
 *
 * Parameters:
-*  struct k_timer params (unused)
+*  struct k_timer dummy (unused)
 *
 *******************************************************************************/
-static void capsense_timer_callback(struct k_timer *params)
+static void capsense_timer_callback(struct k_timer *dummy)
 {
     Cy_CapSense_Wakeup(&cy_capsense_context);
-    capsense_command_t command = CAPSENSE_SCAN;
+    static capsense_command_t command = CAPSENSE_SCAN;
 
-    ARG_UNUSED(params);
+    ARG_UNUSED(dummy);
 
     /* Send command to start CAPSENSE scan */
-    k_queue_append(&capsense_command_q, &command);
+    k_fifo_put(&capsense_command_q, &command);
 }
 
 
@@ -397,8 +399,8 @@ static void capsense_isr(void)
 static void tuner_init(void)
 {
     cy_rslt_t result;
-    /* Configure Capsense Tuner as EzI2C Slave */
-    sEzI2C_sub_cfg.buf = (uint8 *)&cy_capsense_tuner;
+    /* Configure CAPSENSE Tuner as EzI2C Slave */
+    sEzI2C_sub_cfg.buf = (uint8_t *)&cy_capsense_tuner;
     sEzI2C_sub_cfg.buf_rw_boundary = sizeof(cy_capsense_tuner);
     sEzI2C_sub_cfg.buf_size = sizeof(cy_capsense_tuner);
     sEzI2C_sub_cfg.slave_address = 8U;

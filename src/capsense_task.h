@@ -71,7 +71,7 @@ typedef enum
 /*******************************************************************************
  * Function prototype
  ******************************************************************************/
-void task_capsense(void* param);
+void task_capsense(void *dummy1, void *dummy2, void *dummy3);
 
 
 #endif /* SOURCE_CAPSENSE_TASK_H_ */

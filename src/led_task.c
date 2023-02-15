@@ -62,7 +62,7 @@
  * Global variable
  ******************************************************************************/
 /* Queue handle used for LED data */
-K_QUEUE_DEFINE(led_command_data_q);
+K_FIFO_DEFINE(led_command_data_q);
 
 
 /*******************************************************************************
@@ -75,14 +75,16 @@ K_QUEUE_DEFINE(led_command_data_q);
 *  void *param : Task parameter defined during task creation (unused)
 *
 *******************************************************************************/
-void task_led(void* param)
+void task_led(void *dummy1, void *dummy2, void *dummy3)
 {
     cyhal_pwm_t pwm_led;
     bool led_on = true;
     led_command_data_t *led_cmd_data;
 
     /* Suppress warning for unused parameter */
-    ARG_UNUSED(param);
+    ARG_UNUSED(dummy1);
+	ARG_UNUSED(dummy2);
+	ARG_UNUSED(dummy3);
 
     /* Initialize a PWM resource for driving an LED. */
     cyhal_pwm_init(&pwm_led, CYBSP_USER_LED, NULL);
@@ -94,7 +96,7 @@ void task_led(void* param)
     for(;;)
     {
         /* Block until a command has been received over queue */
-        led_cmd_data = k_queue_get(&led_command_data_q, K_FOREVER);
+        led_cmd_data = k_fifo_get(&led_command_data_q, K_FOREVER);
 
         /* Command has been received from queue */
         switch(led_cmd_data->command)

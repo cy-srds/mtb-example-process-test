@@ -7,8 +7,8 @@
 *              code example also features interfacing with Tuner GUI using I2C
 *              interface.
 *
-*              This code example uses FreeRTOS. For documentation and API
-*              references of FreeRTOS, visit : https://www.freertos.org
+*              This code example uses Zephyr. For documentation and API
+*              references of Zephyr, visit : https://docs.zephyrproject.org
 *
 * Related Document: See README.md
 *
@@ -55,15 +55,25 @@
 /*******************************************************************************
  * Global constants
  ******************************************************************************/
-/* Priorities of user tasks in this project. configMAX_PRIORITIES is defined in
- * the FreeRTOSConfig.h and higher priority numbers denote high priority tasks.
- */
+/* Priorities of user tasks in this project. */
 #define TASK_CAPSENSE_PRIORITY   (6u)
 #define TASK_LED_PRIORITY        (5u)
 
 /* Stack sizes of user tasks in this project */
 #define TASK_CAPSENSE_STACK_SIZE (1024u)
 #define TASK_LED_STACK_SIZE      (512u)
+
+
+/*******************************************************************************
+ * Global variable
+ ******************************************************************************/
+/* Create the threads. See the respective task definition for more
+    * details of these tasks.
+    */
+K_THREAD_DEFINE(task_capsense_id, TASK_CAPSENSE_STACK_SIZE, task_capsense,
+            NULL, NULL, NULL, TASK_CAPSENSE_PRIORITY, 0, -1);
+K_THREAD_DEFINE(task_led_id, TASK_LED_STACK_SIZE, task_led,
+            NULL, NULL, NULL, TASK_LED_PRIORITY, 0, -1);
 
 
 /*******************************************************************************
@@ -80,7 +90,6 @@
 void main(void)
 {
     cy_rslt_t result;
-    uint16_t sleep_ms = 5000;
 
     /* Initialize the device and board peripherals */
     result = cybsp_init();
@@ -94,20 +103,10 @@ void main(void)
     /* Enable global interrupts */
     __enable_irq();
 
-    /* Wait a few seconds before main() exit, giving the it an
-	 * opportunity to dump any output.
-	 */
-    k_msleep(sleep_ms);
+    /* Started the created threads */
+    k_thread_start(task_capsense_id);
+    k_thread_start(task_led_id);
 }
-
-
-/* Create the user tasks. See the respective task definition for more
-    * details of these tasks.
-    */
-K_THREAD_DEFINE(task_capsense_id, TASK_CAPSENSE_STACK_SIZE, task_capsense,
-            NULL, NULL, NULL, TASK_CAPSENSE_PRIORITY, 0, 0);
-K_THREAD_DEFINE(task_led_id, TASK_LED_STACK_SIZE, task_led,
-            NULL, NULL, NULL, TASK_LED_PRIORITY, 0, 0);
 
 
 /* [] END OF FILE */

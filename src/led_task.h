@@ -84,13 +84,13 @@ typedef struct
 /*******************************************************************************
  * Global variable
  ******************************************************************************/
-extern struct k_queue led_command_data_q;
+extern struct k_fifo led_command_data_q;
 
 
 /*******************************************************************************
  * Function prototype
  ******************************************************************************/
-void task_led(void* param);
+void task_led(void *dummy1, void *dummy2, void *dummy3);
 
 
 #endif /* SOURCE_LED_TASK_H_ */
