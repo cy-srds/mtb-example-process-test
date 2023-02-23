@@ -57,7 +57,7 @@
 #define EZI2C_INTERRUPT_PRIORITY    (6u)    /* EZI2C interrupt priority must be
                                              * higher than CAPSENSE interrupt
                                              */
-#define CAPSENSE_SCAN_INTERVAL_MS    (15u)   /* in milliseconds*/
+#define CAPSENSE_SCAN_INTERVAL_MS    (20u)   /* in milliseconds*/
 
 
 /*******************************************************************************
