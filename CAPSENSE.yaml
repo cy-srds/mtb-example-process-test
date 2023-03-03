@@ -10,6 +10,6 @@ manifest:
     - name: zephyr_example_capsense_buttons_slider
       url: https://github.com/cy-srds/zephyr-example-capsense-buttons-slider
       submodules: true
-      revision: capsense-port-v1
+      revision: develop
       groups:
         - samples
