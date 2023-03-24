@@ -11,5 +11,3 @@ manifest:
       url: https://github.com/cy-srds/zephyr-example-capsense-buttons-slider
       submodules: true
       revision: develop
-      groups:
-        - samples
